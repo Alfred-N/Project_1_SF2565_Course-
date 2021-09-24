@@ -1,27 +1,29 @@
 #include "Header.h"
 
-double myExp(double x_in, double, tol, int fac, double prev)
+double myExp(double x_in, double tol)
 {
-	fac *= fac;
-
-	if (idx == n) { return prev + x_in *fac; } //return the last term
-
-	else if (idx == 0) // return the value of the polynomial as a function of the next parenthesis
+	double sum = 1.0;
+	double next_term = INFINITY;
+	int fac = 1;
+	double x_pow = 1;
+	const int maxIt = 50;
+	int i = 1;
+	while (abs(next_term)>tol)
 	{
-		if (useMod) { x_in = fmod(x_in, 2 * M_PI); }
-		return x_in * sinTaylor(x_in, n, idx + 1, prev);
+		x_pow *= x_in;
+		sum += x_pow / fac;
+		i += 1;
+		fac *= i;
+		next_term = x_pow * x_in / fac;
+
+		if (i>maxIt)
+		{
+			printf("%s%d%s", "Warning: max iterations of ", maxIt, " reached. Specified tol not guaranteed. Try a larger tol \n");
+			break;			
+		}
 	}
-	else  //return the value of the current parenthesis as a function of the next parenthesis
-	{
-		double currCoeff = getSinCoeff(idx, prev);
-		return prev + x_in * x_in * sinTaylor(x_in, n, idx + 1, currCoeff);
-	}
+	return sum + next_term;
+}
 
-
-
-//double getSinCoeff(int n, double prev_coeff)
-//{
-//	assert(n >= 0 && "n must be geq than 0");
-//	if (n == 0) { return 1; }
-//	else { return (double)-1 / ((2 * n + 1) * (2 * n)) * prev_coeff; }
-//}
+//printf("%d%s %d %s", i, "! = ", fac, "\n");
+//printf("%s %d %s", "x power = ", i, "\n");

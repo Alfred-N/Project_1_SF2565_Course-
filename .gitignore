@@ -1,0 +1,11 @@
+*.class
+.gitignore
+Header.h
+expFuntions.cpp
+main.cpp
+.vs/
+Project2.sln
+Project2.vcxproj
+Project2.vcxproj.filters
+Project2.vcxproj.user
+/Debug
