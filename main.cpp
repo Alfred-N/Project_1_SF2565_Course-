@@ -8,16 +8,11 @@ int main()
     /*const double x = -1;
     printf("%s%f%s %f%s", "myExp(", x, ") \t= \t", myExp(x, 1e-8), "\n");
     printf("%s%f%s %f%s", "std::exp(", x, ") \t= \t", exp(x), "\n");*/
+    Matrix a(2, 2, new double* [] {new double[] {2, 0}, new double[] {0, 2}});
+    Matrix expA = myExp(a); expA.printMatrix();
+    
+    
+    //testMatrixArithmetic();
 
-    Matrix a = Matrix(3);
-    a.fillMatrix(0);
-    
-    Matrix b = a;
-    b.setElement(1, 1, 5.0);
-    a.printMatrix();
-    b.printMatrix();
-    
     return EXIT_SUCCESS;
 }
-
-

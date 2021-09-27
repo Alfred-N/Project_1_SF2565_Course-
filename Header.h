@@ -9,7 +9,12 @@ using namespace std;
 /// <param name="tol"> (double) specified tolerance (default = 1e-8) </param> 
 /// <returns> exp(x_in) (double)
 /// </returns>
-double myExp(double x_in, double tol = 1e-8);
+double myExp(double, double tol = 1e-8);
+Matrix myExp(const Matrix&, double tol = 1e-8);
 
+/// <summary>
+/// Script for testing the basic arithmetic functions of the Matrix class
+/// </summary>
+void testMatrixArithmetic();
 
 
