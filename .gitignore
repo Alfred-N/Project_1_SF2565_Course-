@@ -1,8 +1,5 @@
 *.class
 .gitignore
-Header.h
-expFuntions.cpp
-main.cpp
 .vs/
 Project2.sln
 Project2.vcxproj

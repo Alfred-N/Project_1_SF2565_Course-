@@ -24,7 +24,12 @@ double myExp(double x_in, double tol)
 	}
 	return sum + next_term;
 }
-
+/// <summary>
+/// Calculates the matrix exponential using the power series definition.///
+/// </summary>
+/// <param name="A">The matrix to evaluate the exponential on</param>
+/// <param name="tol">Tolerance as in the maximum allowed error of the norm</param>
+/// <returns></returns>
 Matrix myExp(const Matrix& A, double tol)
 {
 	try
@@ -42,18 +47,23 @@ Matrix myExp(const Matrix& A, double tol)
 	//--------------------------------------------------------------
 	Matrix A_pow = A.identity();
 	Matrix expA = A_pow;
+	Matrix expA_next = expA * INFINITY;
+	Matrix diff(A);
+	double error = INFINITY;
 	int fac = 1;
 	int i = 1;
-	const int maxIt = 10;
-	while (true)
+	const int maxIt = 100;
+	while (error>tol)
 	{
 		A_pow *= A;
 		expA += A_pow * (1.0 / fac);
 		i += 1;
 		fac *= i;
-		//next_term = x_pow * x_in / fac;
-		cout << "fac= " << fac << endl;
-		expA.printMatrix();
+		expA_next = (A_pow * A) * (1.0 / fac);
+		diff = expA_next - expA;
+		error = diff.norm();
+
+		//expA.printMatrix();
 		if (i > maxIt)
 		{
 			printf("%s%d%s", "Warning: max iterations of ", maxIt, " reached. Specified tol not guaranteed. Try a larger tol \n");
@@ -61,6 +71,7 @@ Matrix myExp(const Matrix& A, double tol)
 		}
 		
 	}
+	cout << "It: = " << i << endl;
 	return expA;
 }
 
